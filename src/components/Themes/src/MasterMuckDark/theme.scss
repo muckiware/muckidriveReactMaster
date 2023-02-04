@@ -1,0 +1,18 @@
+/**
+ * @package     muckiwareDrive
+ * @subpackage  ReactMaster
+ *
+ * @copyright Copyright (C) 2021-2023 by muckiware. All rights reserved.
+ * @license MIT
+ * @link https://github.com/muckiware/muckidriveReactMaster
+ */
+
+//Colors
+$primary: #ee5f00 !default;
+$secondary: #552200 !default;
+$body-bg: #000;
+
+// //Generals
+$enable-rounded: false !default;
+
+@import '../Basic/theme.scss'

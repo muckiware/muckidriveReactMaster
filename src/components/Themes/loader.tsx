@@ -9,39 +9,37 @@ import React, {
 import ModelLoading from './models/loading';
 import ModelTheme, { IThemeConfig } from './models/theme';
 import Loading from './src/Basic/components/loading/loading';
-import Context from '../../context/context';
+import appContext from '../../context/context';
 
 const ThemeLoader: React.FC = (props) => {
 
     const [Layout, setLayout] = useState<React.FC<ModelTheme>>();
-    const [themeName, setThemeName] = useState<string>('');
+    const context = useContext(appContext);
 
-    const getThemeSetups = useCallback(async(themeName: string) => {
+    const getThemeSetups = useCallback(async() => {
 
-        let themeConfig: IThemeConfig = await import(`./src/${themeName}/theme.json`);
+        let themeConfig: IThemeConfig = await import(`./src/${context.theme.name}/theme.json`);
+
         return {
             "name": themeConfig.name,
             "version": themeConfig.version,
             "path": themeConfig.path
         }
-    },[]);
+    },[context]);
 
     useEffect(() => {
 
-        if (themeName === '') {
-            setThemeName('Basic');
-        }
+        getThemeSetups().catch(console.error).then((themeConfig: any) => {
 
-        if (themeName !== '') {
+            context.theme.name = themeConfig.name
+            context.theme.version = themeConfig.version
+            context.theme.path = themeConfig.path
 
-            getThemeSetups(themeName).catch(console.error).then((themeConfig: any) => {
-    
-                const currentLayout: React.FC<ModelTheme> = lazy(() => import(`${themeConfig.path}`));
-                setLayout(currentLayout);
-            });
-        }
+            const currentLayout: React.FC<ModelTheme> = lazy(() => import(`${themeConfig.path}`));
+            setLayout(currentLayout);
+        });
 
-    }, [getThemeSetups, themeName]);
+    }, [getThemeSetups, context]);
 
     if(Layout) {
         return React.createElement(Layout, null, `Hello`);

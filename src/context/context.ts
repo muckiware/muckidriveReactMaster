@@ -1,11 +1,7 @@
 import { createContext } from "react";
 
-import { ThemeConfig } from '../components/Themes/models/theme';
+import ContextModelApp from './models/app'
 
-export type ThemeContextType = "light" | "dark";
+const appContext = createContext<ContextModelApp>(new ContextModelApp());
 
-const Context = createContext<any>({
-    theme: ThemeConfig
-});
-
-export default Context;
+export default appContext;

@@ -7,13 +7,15 @@
  * @link https://github.com/muckiware/muckidriveReactMaster
  */
 
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useContext } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import appContext from '../../../../../../context/context';
 // import themes from '../../..';
 
 const ThemeSwitcher: React.FC<{}> = (props) => {
 
     const [themeItems, setThemeItems] = useState<any>();
+    const context = useContext(appContext);
 
     const getThemesList = useCallback(async() => {
 
@@ -38,6 +40,7 @@ const ThemeSwitcher: React.FC<{}> = (props) => {
     }, [getThemesList, themeItems]);
 
     if(themeItems) {
+
         return (
             <React.Fragment>
                 <Dropdown>

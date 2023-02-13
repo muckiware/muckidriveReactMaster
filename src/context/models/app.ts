@@ -1,5 +1,5 @@
 
-import ModelTheme, { IThemeConfig } from '../../components/Themes/models/theme';
+import { IThemeConfig } from '../../components/Themes/models/theme';
 export interface language {
     name: string;
     code: string;
@@ -14,9 +14,9 @@ export default class ContextModelApp {
     constructor() {
 
         this.theme = {
-            name: 'Basic',
+            name: String(process.env.REACT_APP_ROOT_DEFAULT_THEME),
             version: '1.0.0',
-            path: './src/Basic/layout'
+            path: process.env.REACT_APP_ROOT_PATH_THEMES + '/' + process.env.REACT_APP_ROOT_DEFAULT_THEME
         };
         this.language = {
             name: 'english',

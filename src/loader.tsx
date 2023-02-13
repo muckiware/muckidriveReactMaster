@@ -1,3 +1,12 @@
+/**
+ * @package     muckiwareDrive
+ * @subpackage  ReactMaster
+ *
+ * @copyright Copyright (C) 2021-2023 by muckiware. All rights reserved.
+ * @license MIT
+ * @link https://github.com/muckiware/muckidriveReactMaster
+ */
+
 import React, { 
     useEffect,
     useState,
@@ -6,19 +15,15 @@ import React, {
     useContext
  } from 'react';
 
-import ModelLoading from './models/loading';
-import ModelTheme, { IThemeConfig } from './models/theme';
-
-import Loading from '../../themes/Basic/components/loading/loading';
-import appContext from '../../context/context';
+import ModelLoading from './components/Themes/models/loading';
+import ModelTheme, { IThemeConfig } from './components/Themes/models/theme';
+import Loading from './themes/Basic/components/loading/loading';
+import appContext from './context/context';
 
 const ThemeLoader: React.FC = (props) => {
 
     const [Layout, setLayout] = useState<React.FC<ModelTheme>>();
     const context = useContext(appContext);
-
-    console.log('context in loaser', context);
-    console.log('orgin path', window.location.pathname);
 
     const getThemeSetups = useCallback(async() => {
 
@@ -39,13 +44,12 @@ const ThemeLoader: React.FC = (props) => {
             context.theme.version = themeConfig.version
             context.theme.path = themeConfig.path
 
-            const currentLayout: React.FC<ModelTheme> = lazy(() => import(`${themeConfig.path}/layout`));
+            console.log('themeConfig', themeConfig)
+            const currentLayout: React.FC<ModelTheme> = lazy(() => import(`./${themeConfig.path}/layout`));
             setLayout(currentLayout);
         });
 
     }, [getThemeSetups, context]);
-
-    // console.log('Layout', Layout);
 
     if(Layout) {
         return React.createElement(Layout, null, `Hello`);

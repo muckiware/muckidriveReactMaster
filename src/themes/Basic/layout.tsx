@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 // import Collapse from 'react-bootstrap/Collapse';
 import './theme.scss';
 
-import ModelTheme from '../../models/theme'
+import ModelTheme from '../../components/Themes/models/theme'
 
 import MainHeader from './elements/main/main-header';
 import MainFooter from './elements/main/main-footer';

@@ -1,5 +1,5 @@
 {
     "name": "MasterMuckLight",
     "version": "1.0.0",
-    "path": "./src/MasterMuckLight/layout"
+    "path": "themes/MasterMuckLight"
 }

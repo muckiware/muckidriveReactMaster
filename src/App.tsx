@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ThemeLoader from './components/Themes/loader';
+import ThemeLoader from './loader';
 import ContextModelApp from './context/models/app';
 import appContext from './context/context';
 

@@ -6,9 +6,5 @@
  * @license MIT
  * @link https://github.com/muckiware/muckidriveReactMaster
  */
-const themes = [
-    "./src/MasterMuckDark",
-    "./src/MasterMuckLight"
-];
-
-export default themes;
+export * from './models';
+export * from './loader';

@@ -1,5 +1,5 @@
 {
     "name": "MasterMuckBasic",
     "version": "1.0.0",
-    "path": "./src/Basic/layout"
+    "path": "themes/Basic"
 }

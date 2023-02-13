@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 // import '../MasterMuckBasic/theme.scss';
 import './theme.scss';
 
-import ModelTheme from '../../models/theme'
+import ModelTheme from '../../components/Themes/models/theme'
 
 import MainHeader from './layoutElements/main-header';
 import MainFooter from './layoutElements/main-footer';

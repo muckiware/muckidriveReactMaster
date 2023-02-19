@@ -9,6 +9,8 @@ export default class ContextModelApp {
 
     theme: IThemeConfig;
 
+    availableThemes: IThemeConfig[] | []
+
     language: language;
 
     constructor() {
@@ -22,5 +24,7 @@ export default class ContextModelApp {
             name: 'english',
             code: 'en-US'
         }
+
+        this.availableThemes = [];
     }
 }

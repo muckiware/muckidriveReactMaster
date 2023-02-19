@@ -6,5 +6,5 @@
  * @license MIT
  * @link https://github.com/muckiware/muckidriveReactMaster
  */
+export * as default from './theme';
 export * from './models';
-export * from './loader';

@@ -16,40 +16,52 @@ import React, {
  } from 'react';
 
 import ModelLoading from './components/Themes/models/loading';
-import ModelTheme, { IThemeConfig } from './components/Themes/models/theme';
+import Theme from './components/Themes/theme';
+import ModelTheme, { IThemeConfig } from './components/Themes';
 import Loading from './themes/Basic/components/loading/loading';
 import appContext from './context/context';
 
-const ThemeLoader: React.FC = (props) => {
+const ThemeLoader: React.FC = (props: any) => {
 
-    const [Layout, setLayout] = useState<React.FC<ModelTheme>>();
+    const [Layout, setLayout] = useState<React.FC<ModelTheme.default>>();
+    // const [availableThemes, setAvailableThemes] = useState<IThemeConfig[]>([]);
     const context = useContext(appContext);
 
     const getThemeSetups = useCallback(async() => {
-
-        let themeConfig: IThemeConfig = await import(`${context.theme.path}/theme.json`);
-
-        return {
-            "name": themeConfig.name,
-            "version": themeConfig.version,
-            "path": themeConfig.path
-        }
+        return await import(`${context.theme.path}/theme.json`);
     },[context]);
 
     useEffect(() => {
 
-        getThemeSetups().catch(console.error).then((themeConfig: any) => {
+        getThemeSetups().catch(console.error).then((themeConfig: IThemeConfig) => {
 
             context.theme.name = themeConfig.name
             context.theme.version = themeConfig.version
             context.theme.path = themeConfig.path
 
-            console.log('themeConfig', themeConfig)
-            const currentLayout: React.FC<ModelTheme> = lazy(() => import(`./${themeConfig.path}/layout`));
+            const currentLayout: React.FC<ModelTheme.default> = lazy(() => import(`${themeConfig.path}/layout`));
             setLayout(currentLayout);
         });
 
     }, [getThemeSetups, context]);
+
+    useEffect(() => {
+
+        async function fetchThemes() {
+
+            try {
+                const theme: Theme = new Theme(context.theme.path);
+                const themesList: string[] = await theme.getThemeList();
+                const availableThemes: IThemeConfig[] = await theme.getAvailableThemes(themesList);
+                context.availableThemes = availableThemes;
+                // setAvailableThemes(availableThemes);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          fetchThemes();
+
+    }, [context]);
 
     if(Layout) {
         return React.createElement(Layout, null, `Hello`);

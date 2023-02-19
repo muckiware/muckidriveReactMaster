@@ -1,7 +1,7 @@
 {
     "themes": [
-        "themes/Basic",
-        "themes/MasterMuckLight",
-        "themes/MasterMuckDark"
+        "./themes/Basic",
+        "./themes/MasterMuckLight",
+        "./themes/MasterMuckDark"
     ]
 }

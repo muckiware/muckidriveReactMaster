@@ -12,59 +12,42 @@ import React, {
     useState,
     lazy,
     useCallback,
-    useContext
+    useContext,
+    Suspense
  } from 'react';
 
 import ModelLoading from './components/Themes/models/loading';
-import Theme from './components/Themes/theme';
-import ModelTheme, { IThemeConfig } from './components/Themes';
+import { IThemeConfig } from './components/Themes';
 import Loading from './themes/Basic/components/loading/loading';
-import appContext from './context/context';
+import appContext, { TAppContext } from './appContext';
 
 const ThemeLoader: React.FC = (props: any) => {
 
-    const [Layout, setLayout] = useState<React.FC<ModelTheme.default>>();
-    // const [availableThemes, setAvailableThemes] = useState<IThemeConfig[]>([]);
-    const context = useContext(appContext);
+    const [Layout, setLayout] = useState<React.FC<any>>();
+    const newcontext: TAppContext = useContext(appContext);
 
-    const getThemeSetups = useCallback(async() => {
-        return await import(`${context.theme.path}/theme.json`);
-    },[context]);
-
-    useEffect(() => {
-
-        getThemeSetups().catch(console.error).then((themeConfig: IThemeConfig) => {
-
-            context.theme.name = themeConfig.name
-            context.theme.version = themeConfig.version
-            context.theme.path = themeConfig.path
-
-            const currentLayout: React.FC<ModelTheme.default> = lazy(() => import(`${themeConfig.path}/layout`));
-            setLayout(currentLayout);
-        });
-
-    }, [getThemeSetups, context]);
+    const getThemeSetups = useCallback(async(path: string) => {
+        return await import(`${path}`);
+    },[]);
 
     useEffect(() => {
 
-        async function fetchThemes() {
+        if(newcontext.theme.path) {
 
-            try {
-                const theme: Theme = new Theme(context.theme.path);
-                const themesList: string[] = await theme.getThemeList();
-                const availableThemes: IThemeConfig[] = await theme.getAvailableThemes(themesList);
-                context.availableThemes = availableThemes;
-                // setAvailableThemes(availableThemes);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-          fetchThemes();
+            getThemeSetups(`${newcontext.theme.path}/theme.json`).catch(console.error).then((themeConfig: IThemeConfig) => {
+                const currentLayout: React.FC<any> = lazy(() => import(`${themeConfig.path}/layout`));
+                setLayout(currentLayout);
+            });
+        }
 
-    }, [context]);
+    }, [getThemeSetups, newcontext]);
 
     if(Layout) {
-        return React.createElement(Layout, null, `Hello`);
+        return (
+            <Suspense fallback={<p>loading...</p>}>
+                <Layout/>
+            </Suspense>
+        );
     }
 
     return React.createElement(Loading, new ModelLoading('Theme'));

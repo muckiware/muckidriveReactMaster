@@ -27,4 +27,12 @@ export default class ContextModelApp {
 
         this.availableThemes = [];
     }
+
+    set themeName(name: string) {
+        this.theme.name = name;
+    }
+
+    get context() {
+        return this
+    }
 }

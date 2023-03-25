@@ -7,8 +7,6 @@ import React, { useState, useEffect } from 'react';
 // import '../MasterMuckBasic/theme.scss';
 import './theme.scss';
 
-import ModelTheme from '../../components/Themes/models/theme'
-
 import MainHeader from './layoutElements/main-header';
 import MainFooter from './layoutElements/main-footer';
 import MainNavLeft from './layoutElements/main-nav-left';
@@ -16,7 +14,7 @@ import MainContent from './layoutElements/main-content';
 
 // import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const Layout: React.FC<ModelTheme> = (props) => {
+const Layout: React.FC<any> = (props) => {
 
     const [open, setOpen] = useState(false);
 

@@ -17,32 +17,24 @@ export enum TextTypes {
 }
 
 export interface IThemeConfig {
+
+    /**
+     * Name of the theme
+     */
     name: string;
+
+    /**
+     * Version of the theme
+     */
     version: string;
+
+    /**
+     * In which path is the theme
+     */
     path: string;
-}
 
-export class ThemeConfig {
-
-    name: string;
-    version: string;
-    path: string;
-    constructor() {
-
-        this.name = '';
-        this.version = '0.0.0.';
-        this.path = './'
-    }
-}
-
-export default class ModelTheme {
-
-    displayModus: DisplayModusTypes;
-    primaryColor: string;
-
-    constructor() {
-
-        this.displayModus = DisplayModusTypes.DARK;
-        this.primaryColor = '#000';
-    }
+    /**
+     * Current status if the theme is active or not 
+     */
+    active: boolean;
 }

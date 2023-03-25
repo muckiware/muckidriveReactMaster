@@ -27,7 +27,8 @@ const AppContetxt = React.createContext<TAppContext>({
     theme: {
         name: '',
         version: '',
-        path: ''
+        path: '',
+        active: false
     },
     availableThemes: [],
     setCurrentTheme: (theme: IThemeConfig) => {},
@@ -42,7 +43,8 @@ export const AppContetxtProvider: React.FC<any> = (props: any) => {
     const [theme, setTheme] = useState<IThemeConfig>({
         name: '',
         version: '',
-        path: ''
+        path: '',
+        active: false
     },);
     const [themes, setThemes] = useState<IThemeConfig[]>([],);
 
@@ -82,9 +84,9 @@ export const AppContetxtProvider: React.FC<any> = (props: any) => {
 
                 allThemes.map(async(themePath: string) => {
     
-                    if(defaultTheme.path !== themePath) {
+                    // if(defaultTheme.path !== themePath) {
                         themesList.push(await getThemeSetup(themePath));
-                    }
+                    // }
                 });
             }
 

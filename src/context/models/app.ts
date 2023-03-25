@@ -18,7 +18,8 @@ export default class ContextModelApp {
         this.theme = {
             name: String(process.env.REACT_APP_ROOT_DEFAULT_THEME),
             version: '1.0.0',
-            path: process.env.REACT_APP_ROOT_PATH_THEMES + '/' + process.env.REACT_APP_ROOT_DEFAULT_THEME
+            path: process.env.REACT_APP_ROOT_PATH_THEMES + '/' + process.env.REACT_APP_ROOT_DEFAULT_THEME,
+            active: false
         };
         this.language = {
             name: 'english',

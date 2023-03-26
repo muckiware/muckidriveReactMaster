@@ -1,13 +1,22 @@
+/**
+ * @package     muckiwareDrive
+ * @subpackage  ReactMaster
+ *
+ * @copyright Copyright (C) 2021-2023 by muckiware. All rights reserved.
+ * @license MIT
+ * @link https://github.com/muckiware/muckidriveReactMaster
+ */
+
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const MainContent = () => {
 
     return (
         <React.Fragment>
-            <h3>Left Sidebar with Submenus</h3>
-            <p className='lead'>
-                An example 2-level sidebar with collasible menu items. The menu functions like an \"accordion\" where only a single menu is be open at a time. While the sidebar itself is not toggle-able, it does responsively shrink in width on smaller screens.
-            </p>
+            <main>
+                <Outlet />
+            </main>
         </React.Fragment>
     )
 }

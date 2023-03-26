@@ -10,7 +10,8 @@ import './theme.scss';
 import MainHeader from './layoutElements/main-header';
 import MainFooter from './layoutElements/main-footer';
 import MainNavLeft from './layoutElements/main-nav-left';
-import MainContent from './layoutElements/main-content';
+// import MainContent from './layoutElements/main-content';
+import MainContent from '../Basic/elements/main/main-content';
 
 // import 'bootstrap-icons/font/bootstrap-icons.css';
 
